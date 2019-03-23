@@ -1,0 +1,8 @@
+@import "modal-mixins";
+@import "takeover-mixins";
+
+@include _vanilla-exports("takeover") {
+  .sdv-takeover {
+    @include vanilla-takeover();
+  }
+}

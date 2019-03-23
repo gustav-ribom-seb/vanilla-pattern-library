@@ -7,16 +7,48 @@
 
 ///
 /// @access public
-@mixin vanilla-modal-backdrop($background-color: rgba(0, 0, 0, 0.6)) {
-  transition: all 0.3s ease-in-out;
-  transition-property: background-color, visibility;
-  visibility: hidden;
-  background-color: transparent;
+@mixin vanilla-modal-backdrop(
+  $_background-color: rgba(0, 0, 0, 0.6),
+  $_animation: "fade",
+  $_timing: 0.3s,
+  $_easing: ease-in-out
+) {
+  transition: all #{$_timing} #{$_easing};
   width: 100vw;
   height: 100vh;
-  .-sdv-modal-active &,
-  :target & {
-    background-color: $background-color;
+  @if ($_animation == "fade") {
+    transition-property: background-color, visibility;
+    visibility: hidden;
+    background-color: transparent;
+    .-sdv-modal-active &,
+    :target & {
+      background-color: $_background-color;
+      visibility: visible;
+    }
+  } @else if($_animation == "unfold") {
+    background-color: $_background-color;
     visibility: visible;
+  }
+}
+
+///
+/// @access public
+@mixin vanilla-modal-header() {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 1px solid $vanilla-color-grey8;
+  }
+  &__heading {
+    margin: 0;
+  }
+  &__close {
+    cursor: pointer;
+    outline: 0;
+    background: 0;
+    border: 0;
+    font-size: 1.2rem;
+    color: $vanilla-color-blue;
   }
 }

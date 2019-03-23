@@ -1,7 +1,7 @@
-@import 'modal-mixins';
-@import 'slideout-mixins';
+@import "modal-mixins";
+@import "slideout-mixins";
 
-@include _vanilla-exports('modal-slideout') {
+@include _vanilla-exports("slideout") {
   .sdv-slideout {
     @include vanilla-slideout();
   }

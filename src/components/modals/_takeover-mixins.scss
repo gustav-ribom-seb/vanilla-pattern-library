@@ -6,47 +6,30 @@
 @import "../../utilities";
 @import "node_modules/include-media/dist/include-media";
 @import "../../mixins";
+@import "modal-animations";
 
 ///
 /// @access public
-@mixin vanilla-slideout() {
+@mixin vanilla-takeover() {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   visibility: hidden;
   transition: visibility 0s 0.6s;
   box-sizing: border-box;
 
   @include vanilla-modal-header();
 
-  $__module: &;
-
-  &--right {
-    #{$__module}__container {
-      right: 0;
-      transform: translate3d(100%, 0, 0);
-    }
-  }
-  &--left {
-    #{$__module}__container {
-      left: 0;
-      transform: translate3d(-100%, 0, 0);
-    }
-  }
-  &.-sdv-modal-active,
-  &:target {
-    visibility: visible;
-    transition: visibility 0s 0s;
-    #{$__module}__container {
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
+  @include vanilla-modal-animation(
+    $_selector: &,
+    $_backdrop-animation: "unfold",
+    $_container-animation: "zoom"
+  );
   &__container {
     position: fixed;
-    width: 33%;
+    width: 100%;
     height: 100%;
     overflow-y: auto;
     background: #fff;
